@@ -1,3 +1,5 @@
 src/clientversion.cpp export-subst
 src/litecoin-wallet filter=lfs diff=lfs merge=lfs -text
 src/litecoind filter=lfs diff=lfs merge=lfs -text
+src/test/test_litecoin filter=lfs diff=lfs merge=lfs -text
+src/bench/bench_litecoin filter=lfs diff=lfs merge=lfs -text
