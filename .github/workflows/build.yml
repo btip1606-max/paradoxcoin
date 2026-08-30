@@ -1,4 +1,4 @@
-name: Build Windows
+name: Build Litecoin Test
 
 on:
   push:
@@ -38,6 +38,7 @@ jobs:
         run: |
           ./autogen.sh
           CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site \
+          BOOST_ROOT=$PWD/depends/x86_64-w64-mingw32 \
           ./configure \
             --prefix=/ \
             --without-gui \
@@ -48,16 +49,16 @@ jobs:
             --with-wallet \
             --enable-static \
             LDFLAGS="-static-libgcc -static-libstdc++ -static"
-          make -j$(nproc) sixcoind sixcoin-cli
+          make -j$(nproc) litecoind litecoin-cli
 
       - name: Verify binaries
         run: |
-          ls -la src/sixcoind.exe src/sixcoin-cli.exe
+          ls -la src/litecoind.exe src/litecoin-cli.exe
 
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
-          name: windows-binaries
+          name: litecoin-windows-test
           path: |
-            src/sixcoind.exe
-            src/sixcoin-cli.exe   
+            src/litecoind.exe
+            src/litecoin-cli.exe   
