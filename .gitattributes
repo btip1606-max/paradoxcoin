@@ -1,4 +1,8 @@
 src/clientversion.cpp export-subst
+src/paradoxcoin-wallet filter=lfs diff=lfs merge=lfs -text
+src/paradoxcoind filter=lfs diff=lfs merge=lfs -text
+src/test/test_paradoxcoin filter=lfs diff=lfs merge=lfs -text
+src/bench/bench_paradoxcoin filter=lfs diff=lfs merge=lfs -text
 src/litecoin-wallet filter=lfs diff=lfs merge=lfs -text
 src/litecoind filter=lfs diff=lfs merge=lfs -text
 src/test/test_litecoin filter=lfs diff=lfs merge=lfs -text
