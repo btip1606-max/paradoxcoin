@@ -105,13 +105,13 @@ public:
 
         consensus.nMinimumChainWork = uint256S("0");
         consensus.defaultAssumeValid = uint256S("0x80cdb35c080484df5bf384b311fde3c4694d3405765bc0f596e9eb369ff286e5"); // 2772730
-
+    
         consensus.mweb_input_metadata_grandfather_blockhash = uint256S("0xd1695b5d115f86927a9763768218118ba88b315844e1a0681fa08f6f008be622");
         // One expected week (4,032 blocks) after height 3,150,408.
         consensus.mweb_pegout_feature_activation_height = 3'154'440;
         consensus.frozen_mweb_output_ids = GetFrozenMWEBOutputIDs();
 
-        /**
+        /** 
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.

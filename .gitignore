@@ -149,3 +149,7 @@ db4/
 osx_volname
 dist/
 *.background.tiff
+src/bench/bench_litecoin
+src/litecoin-wallet
+src/litecoind
+src/test/test_litecoin
