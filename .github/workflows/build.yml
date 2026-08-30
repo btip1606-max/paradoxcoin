@@ -1,4 +1,4 @@
-name: Build Litecoin Test
+name: Build Windows
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
           sudo apt update
           sudo apt install -y \
             build-essential libtool autotools-dev automake pkg-config \
-            bsdmainutils curl nsis g++-mingw-w64-x86-64 mingw-w64 \
+            bsdmainutils curl nsis g++-mingw-w64-x86_64 mingw-w64 \
             python3 cmake
 
       - name: Cache depends
@@ -49,7 +49,7 @@ jobs:
             --with-wallet \
             --enable-static \
             LDFLAGS="-static-libgcc -static-libstdc++ -static"
-          make -j$(nproc) litecoind litecoin-cli
+          make -j$(nproc)
 
       - name: Verify binaries
         run: |
@@ -58,7 +58,7 @@ jobs:
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
-          name: litecoin-windows-test
+          name: windows-binaries
           path: |
             src/litecoind.exe
             src/litecoin-cli.exe   
