@@ -653,7 +653,7 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
                 // insecure.
                 bool fReplacementOptOut = true;
 
-                // Litecoin: Only support BIP125 RBF when -mempoolreplacement arg is set
+                // paradoxcoin: Only support BIP125 RBF when -mempoolreplacement arg is set
                 if (gArgs.GetArg("-mempoolreplacement", DEFAULT_ENABLE_REPLACEMENT)) {
                     for (const CTxIn &_txin : ptxConflicting->vin)
                     {

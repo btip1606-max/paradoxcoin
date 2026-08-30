@@ -1,0 +1,33 @@
+# /etc/conf.d/paradoxd: config file for /etc/init.d/paradoxd
+
+# Config file location
+#paradoxD_CONFIGFILE="/etc/paradox/paradox.conf"
+
+# What directory to write pidfile to?  (created and owned by $paradoxD_USER)
+#paradoxD_PIDDIR="/var/run/paradoxd"
+
+# What filename to give the pidfile
+#paradoxD_PIDFILE="${paradoxD_PIDDIR}/paradoxd.pid"
+
+# Where to write paradoxd data (be mindful that the blockchain is large)
+#paradoxD_DATADIR="/var/lib/paradoxd"
+
+# User and group to own paradoxd process
+#paradoxD_USER="paradox"
+#paradoxD_GROUP="paradox"
+
+# Path to paradoxd executable
+#paradoxD_BIN="/usr/bin/paradoxd"
+
+# Nice value to run paradoxd under
+#paradoxD_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#paradoxD_OPTS=""
+
+# The timeout in seconds OpenRC will wait for paradoxd to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+paradoxD_SIGTERM_TIMEOUT=600

@@ -54,12 +54,12 @@ jobs:
 
       - name: Verify binaries
         run: |
-          ls -la src/litecoind.exe src/litecoin-cli.exe
+          ls -la src/paradoxcoind.exe src/paradoxcoin-cli.exe
 
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
           name: windows-binaries
           path: |
-            src/litecoind.exe
-            src/litecoin-cli.exe   
+            src/paradoxcoind.exe
+            src/paradoxcoin-cli.exe   

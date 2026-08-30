@@ -1,6 +1,6 @@
-Litecoin Core version 0.21.5.6 is now available from:
+paradoxcoin Core version 0.21.5.6 is now available from:
 
- <https://download.litecoin.org/litecoin-0.21.5.6/>.
+ <https://download.paradoxcoin.org/paradoxcoin-0.21.5.6/>.
 
 This is an urgent maintenance release that strengthens MWEB transaction,
 block, and P2P-service validation. Upgrading is strongly recommended for all
@@ -9,7 +9,7 @@ activation height described below.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/litecoin-project/litecoin/issues>
+  <https://github.com/paradoxcoin-project/paradoxcoin/issues>
 
 Notable changes
 ===============

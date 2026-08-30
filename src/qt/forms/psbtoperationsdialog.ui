@@ -18,7 +18,7 @@
     <number>12</number>
    </property>
    <property name="sizeConstraint">
-    <enum>QLayout::SetDefaultConstraint</enum>
+    <enum>QLayout::SetDefauPARonstraint</enum>
    </property>
    <property name="bottomMargin">
     <number>12</number>

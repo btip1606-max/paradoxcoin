@@ -1,12 +1,12 @@
-Litecoin Core version 0.21.4 is now available from:
+paradoxcoin Core version 0.21.4 is now available from:
 
- <https://download.litecoin.org/litecoin-0.21.4/>.
+ <https://download.paradoxcoin.org/paradoxcoin-0.21.4/>.
 
 This is a new patch version release that includes, new features and important security updates.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/litecoin-project/litecoin/issues>
+  <https://github.com/paradoxcoin-project/paradoxcoin/issues>
 
 Notable changes
 ===============

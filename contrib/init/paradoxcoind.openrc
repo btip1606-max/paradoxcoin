@@ -1,0 +1,92 @@
+#!/sbin/openrc-run
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/paradox/.paradox" ]; then
+	paradoxD_DEFAULT_DATADIR="/var/lib/paradox/.paradox"
+else
+	paradoxD_DEFAULT_DATADIR="/var/lib/paradoxd"
+fi
+
+paradoxD_CONFIGFILE=${paradoxD_CONFIGFILE:-/etc/paradox/paradox.conf}
+paradoxD_PIDDIR=${paradoxD_PIDDIR:-/var/run/paradoxd}
+paradoxD_PIDFILE=${paradoxD_PIDFILE:-${paradoxD_PIDDIR}/paradoxd.pid}
+paradoxD_DATADIR=${paradoxD_DATADIR:-${paradoxD_DEFAULT_DATADIR}}
+paradoxD_USER=${paradoxD_USER:-${paradox_USER:-paradox}}
+paradoxD_GROUP=${paradoxD_GROUP:-paradox}
+paradoxD_BIN=${paradoxD_BIN:-/usr/bin/paradoxd}
+paradoxD_NICE=${paradoxD_NICE:-${NICELEVEL:-0}}
+paradoxD_OPTS="${paradoxD_OPTS:-${paradox_OPTS}}"
+
+name="paradox Core Daemon"
+description="paradox cryptocurrency P2P network daemon"
+
+command="/usr/bin/paradoxd"
+command_args="-pid=\"${paradoxD_PIDFILE}\" \
+		-conf=\"${paradoxD_CONFIGFILE}\" \
+		-datadir=\"${paradoxD_DATADIR}\" \
+		-daemon \
+		${paradoxD_OPTS}"
+
+required_files="${paradoxD_CONFIGFILE}"
+start_stop_daemon_args="-u ${paradoxD_USER} \
+			-N ${paradoxD_NICE} -w 2000"
+pidfile="${paradoxD_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${paradoxD_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${paradoxD_USER}:${paradoxD_GROUP}" \
+	"${paradoxD_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${paradoxD_USER}:${paradoxD_GROUP}" \
+	"${paradoxD_PIDDIR}"
+
+	checkpath -f \
+	-o ${paradoxD_USER}:${paradoxD_GROUP} \
+	-m 0660 \
+	${paradoxD_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${paradoxD_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run paradoxd."
+		eerror "The setting must appear in ${paradoxD_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"paradox Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

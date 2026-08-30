@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-# Copyright (c) 2026 The Litecoin Core developers
+# Copyright (c) 2026 The paradoxcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Check that a compact block with a mutated MWEB body discourages its peer."""
 
 import copy
 
-from test_framework.ltc_util import setup_mweb_chain
+from test_framework.PAR_util import setup_mweb_chain
 from test_framework.messages import (
     BlockTransactions,
     CBlock,
